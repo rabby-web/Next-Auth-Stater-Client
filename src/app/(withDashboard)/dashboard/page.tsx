@@ -10,7 +10,10 @@ const DashboardPage = async () => {
       {session?.user && (
         <>
           <Image
-            src={session?.user?.image}
+            src={
+              session?.user?.image ||
+              "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+            }
             width={170}
             height={170}
             alt="user-img"
