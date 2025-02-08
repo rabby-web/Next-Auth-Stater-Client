@@ -1,17 +1,19 @@
-"use client";
 
+
+"use client";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 
-type UserProps = {
-  user: {
+export type SessionProps = {
+  user?: {
     name?: string | null | undefined;
     email?: string | null | undefined;
     image?: string | null | undefined;
+    role?: string | null | undefined;
   };
 };
 
-const Navbar = ({ session }: { session: UserProps | null }) => {
+const Navbar = ({ session }: { session: SessionProps | null | undefined }) => {
   return (
     <div className="w-[90%] mx-auto flex items-center justify-between bg-white border-b py-4">
       <div className="flex items-center">
