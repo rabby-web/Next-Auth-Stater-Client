@@ -1,6 +1,17 @@
+"use client";
+
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 
-const Navbar = () => {
+type UserProps = {
+  user: {
+    name?: string | null | undefined;
+    email?: string | null | undefined;
+    image?: string | null | undefined;
+  };
+};
+
+const Navbar = ({ session }: { session: UserProps | null }) => {
   return (
     <div className="w-[90%] mx-auto flex items-center justify-between bg-white border-b py-4">
       <div className="flex items-center">
@@ -66,15 +77,21 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center">
-        <button className="border border-red-500 text-red-500 px-5 py-2 rounded-full hover:bg-red-500 hover:text-black transition duration-200">
-          Logout
-        </button>
-        <Link
-          href="/login"
-          className="border border-teal-500 text-teal-500 px-5 py-2 rounded-full hover:bg-teal-500 hover:text-black transition duration-200"
-        >
-          Login
-        </Link>
+        {session?.user ? (
+          <button
+            onClick={() => signOut()}
+            className="border border-red-500 text-red-500 px-5 py-2 rounded-full hover:bg-red-500 hover:text-black transition duration-200"
+          >
+            Logout
+          </button>
+        ) : (
+          <Link
+            href="/login"
+            className="border border-teal-500 text-teal-500 px-5 py-2 rounded-full hover:bg-teal-500 hover:text-black transition duration-200"
+          >
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );
